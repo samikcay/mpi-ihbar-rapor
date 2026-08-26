@@ -1,0 +1,718 @@
+<!-- İhbar Site Raporu — Teknik Dokümantasyon (PDF çıktısı için) -->
+<meta charset="utf-8">
+<title>İhbar Site Raporu — Teknik Dokümantasyon</title>
+<style>
+  @page { size: A4; margin: 22mm 20mm 20mm 20mm; }
+
+  html { font-size: 10.5pt; }
+  body {
+    font-family: "Charter", "Cambria", "Georgia", serif;
+    line-height: 1.62;
+    color: #1c1c1c;
+    max-width: 62em;
+    margin: 0 auto;
+    padding: 0 1em 3em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* --- Kapak --- */
+  .kapak {
+    padding: 4.5em 0 3em;
+    border-bottom: 2.5px solid #1c1c1c;
+    margin-bottom: 2.5em;
+  }
+  .kapak .ust {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #6a6a6a;
+    margin-bottom: 1.1em;
+  }
+  .kapak h1 {
+    font-size: 2.15rem;
+    line-height: 1.2;
+    margin: 0 0 0.35em;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    border: none;
+    padding: 0;
+  }
+  .kapak .alt {
+    font-size: 1.02rem;
+    color: #444;
+    margin-bottom: 2em;
+  }
+  .kunye {
+    display: flex;
+    gap: 2.6em;
+    font-size: 0.82rem;
+    color: #555;
+  }
+  .kunye div span {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #8a8a8a;
+    margin-bottom: 0.25em;
+  }
+
+  /* --- Başlıklar --- */
+  h2 {
+    font-size: 1.32rem;
+    font-weight: 600;
+    margin: 2.5em 0 0.8em;
+    padding-bottom: 0.32em;
+    border-bottom: 1.5px solid #d4d4d4;
+    letter-spacing: -0.01em;
+    page-break-after: avoid;
+  }
+  h3 {
+    font-size: 1.06rem;
+    font-weight: 600;
+    margin: 1.9em 0 0.55em;
+    color: #2a2a2a;
+    page-break-after: avoid;
+  }
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 1.4em 0 0.4em;
+    color: #3a3a3a;
+    page-break-after: avoid;
+  }
+
+  p { margin: 0 0 0.95em; text-align: justify; hyphens: auto; }
+
+  /* --- Tablolar --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.1em 0 1.5em;
+    font-size: 0.88rem;
+  }
+  /* Kisa tablolar bolunmesin, uzunlar bolunebilsin */
+  table.kisa { page-break-inside: avoid; }
+  thead { display: table-header-group; }
+  tr { page-break-inside: avoid; }
+  th {
+    text-align: left;
+    font-weight: 600;
+    padding: 0.52em 0.7em;
+    border-bottom: 1.5px solid #1c1c1c;
+    background: #f7f7f5;
+  }
+  td {
+    padding: 0.48em 0.7em;
+    border-bottom: 1px solid #e6e6e6;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: 1px solid #c8c8c8; }
+
+  /* --- Kod --- */
+  code {
+    font-family: "Consolas", "Menlo", monospace;
+    font-size: 0.85em;
+    background: #f4f4f2;
+    padding: 0.12em 0.36em;
+    border-radius: 2px;
+    color: #1a1a1a;
+  }
+  pre {
+    background: #f7f7f5;
+    border: 1px solid #e2e2e0;
+    border-left: 3px solid #8a8a88;
+    padding: 0.9em 1.1em;
+    overflow-x: auto;
+    font-size: 0.83rem;
+    line-height: 1.5;
+    margin: 1.1em 0 1.4em;
+    page-break-inside: avoid;
+  }
+  pre code { background: none; padding: 0; font-size: 1em; }
+
+  /* --- İşlev kartı --- */
+  .islev {
+    margin: 1.3em 0;
+    padding-left: 0.95em;
+    border-left: 2.5px solid #d0d0ce;
+  }
+  .islev .imza {
+    font-family: "Consolas", "Menlo", monospace;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.4em;
+    display: block;
+  }
+  .islev p { margin-bottom: 0.5em; }
+  .islev p:last-child { margin-bottom: 0; }
+
+  /* --- Not kutusu --- */
+  .not {
+    background: #fbfaf6;
+    border: 1px solid #e8e4d8;
+    border-left: 3px solid #b8a878;
+    padding: 0.85em 1.1em;
+    margin: 1.2em 0;
+    font-size: 0.9rem;
+    page-break-inside: avoid;
+  }
+  .not strong { color: #6b5d38; }
+
+  ul, ol { margin: 0 0 1em; padding-left: 1.45em; }
+  li { margin-bottom: 0.38em; }
+
+  .akis {
+    font-family: "Consolas", "Menlo", monospace;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    background: #f7f7f5;
+    border: 1px solid #e2e2e0;
+    padding: 1.1em 1.3em;
+    margin: 1.2em 0 1.5em;
+    white-space: pre;
+    overflow-x: auto;
+    page-break-inside: avoid;
+  }
+
+  .sayfa-kir { page-break-before: always; }
+
+  @media print {
+    body { max-width: none; padding: 0; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+
+<div class="kapak">
+  <div class="ust">Milli Piyango İdaresi · Talih Oyunları Dairesi</div>
+  <h1>İhbar Site Raporu<br>SAP Aktarım Programı</h1>
+  <div class="alt">Teknik dokümantasyon ve kullanım kılavuzu</div>
+  <div class="kunye">
+    <div><span>Sürüm</span>25.08.2026</div>
+    <div><span>Platform</span>Windows + Microsoft Excel</div>
+    <div><span>Dağıtım</span>IhbarRapor.exe (tek dosya)</div>
+  </div>
+</div>
+
+<h2>1. Programın işi</h2>
+
+<p>Program, SAP'tan alınan metin çıktılarını okur ve <em>İhbar Site Rapor</em>
+çalışma kitabındaki altı sekmeye yazar. İstenirse Word raporundaki sayıları da
+günceller.</p>
+
+<p>Bu iş daha önce elle yapılıyordu. SAP çıktısı açılıyor, sayılar tek tek
+Excel'e giriliyor, sonra aynı sayılar Word metnine taşınıyordu. Tekrarlayan ve
+gözden kaçmaya açık bir işti. Program bunu üstlenir.</p>
+
+<h2>2. Veri nasıl akıyor</h2>
+
+<div class="akis">SAP .txt (4 dosya, UTF-16LE)
+      │
+      ▼
+sap_parser ──▶ {"items": [(ad, sayı)...], "total": int, "period": (baş, bit)}
+      │
+      ▼
+rapor.calistir ── doğrulama, dönem hesabı, yedekleme
+      │
+      ├──▶ excel_writer (COM) ──▶ 6 sekme + dönem tarihleri
+      │           │
+      │           ▼
+      │     Yıllar Bazlı B/C/D ──▶ B25 / E25 kümülatif formülleri
+      │                                      │
+      └──▶ word_writer ◀────────────────────┘
+                  │      (Excel'den okunan sayılar)
+                  ▼
+            Word .docx paragrafları</div>
+
+<p>Sıralamada kritik bir bağımlılık var. Word'deki kümülatif cümle, Excel'in
+<code>Yıllar Bazlı</code> sekmesindeki formüllerden besleniyor. Bu yüzden Word
+güncellemesi Excel kaydedildikten <strong>sonra</strong> çalışır ve kaydedilmiş
+dosyayı okur. Sıra değişirse Word'e eski sayı gider.</p>
+
+<h2>3. Modüller</h2>
+
+<table>
+  <tr><th style="width:11em">Modül</th><th>Sorumluluğu</th></tr>
+  <tr><td><code>rapor.py</code></td><td>Ana akış, komut satırı, özet raporu, giriş noktası</td></tr>
+  <tr><td><code>gui.py</code></td><td>Pencere arayüzü</td></tr>
+  <tr><td><code>sap_parser.py</code></td><td>SAP metin çıktılarını ayrıştırma</td></tr>
+  <tr><td><code>excel_writer.py</code></td><td>Excel'e yazma (COM üzerinden)</td></tr>
+  <tr><td><code>word_writer.py</code></td><td>Word'e yazma (python-docx)</td></tr>
+  <tr><td><code>tarih.py</code></td><td>Tarih biçimleri ve dosya adı</td></tr>
+  <tr><td><code>labels.py</code></td><td>Etiket yazımının düzeltilmesi</td></tr>
+  <tr><td><code>hatalar.py</code></td><td>Hata sınıflandırma ve kurtarma</td></tr>
+</table>
+
+<div class="sayfa-kir"></div>
+<h2>4. İşlev başvurusu</h2>
+
+<h3>4.1 sap_parser.py</h3>
+
+<p>SAP çıktıları UTF-16LE kodlamayla, sekme ayraçlı olarak gelir. Veri
+satırlarının arasında boş satır bulunur.</p>
+
+<div class="islev">
+  <span class="imza">read_sap_text(path) → list[str]</span>
+  <p>Dosyayı kodlamasını kendisi saptayarak okur. Önce bayt sırası işaretine
+  bakar, sonra sırasıyla UTF-16, UTF-8-BOM, UTF-8, CP1254 ve Latin-1 dener.
+  Sayfa besleme karakterlerini temizler, satır listesi döndürür.</p>
+  <p>Dosya boşsa veya kodlama çözülemezse <code>ParseError</code> verir.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">parse_int(text) → int</span>
+  <p><code>'64.145'</code> değerini <code>64145</code> yapar. Nokta binlik
+  ayracını atar, bölünmez boşlukları temizler. Gelen değer sayı değilse
+  <code>ParseError</code> verir.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">parse_simple(path) → dict</span>
+  <p>Tek bloklu raporları okur. İçerik, durum ve şube dosyaları bu yapıdadır.
+  Döndürdüğü sözlük şu üç anahtarı taşır: <code>items</code> (ad ve sayı
+  çiftleri), <code>total</code> (SAP'ın kendi toplam satırı) ve
+  <code>period</code> (rapor dönemi).</p>
+</div>
+
+<div class="islev">
+  <span class="imza">parse_countries(path) → dict</span>
+  <p>Ülke raporu iki blok halinde yazılır. Sol blokta 1'den n'e, sağ blokta
+  n+1'den sona kadar olan kayıtlar bulunur. İşlev bunları sıra numarasına göre
+  birleştirip tek listeye çevirir.</p>
+  <p>Sıra numarası tekrar ediyorsa veya arada boşluk varsa
+  <code>ParseError</code> verir.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">_find_total(lines) → int | None</span>
+  <p>Dosyanın sonundaki <code>TOPLAM SİTE SAYISI</code> değerini bulur.
+  Doğrulama için kullanılır. Satırların toplamı bu değerle karşılaştırılır,
+  tutmuyorsa kullanıcı uyarılır.</p>
+</div>
+
+<h3>4.2 tarih.py</h3>
+
+<p>Belgede üç ayrı tarih biçimi geçiyor. Her birinin ayrı işlevi var.</p>
+
+<table>
+  <tr><th style="width:15em">İşlev</th><th>Ne yapar</th></tr>
+  <tr><td><code>gun_coz(metin)</code></td><td><code>07.08.2026</code>, <code>7.8.2026</code> ve <code>07/08/2026</code> biçimlerini kabul eder, <code>date</code> döndürür</td></tr>
+  <tr><td><code>nokta(d)</code></td><td><code>07.08.2026</code></td></tr>
+  <tr><td><code>ad_ile(d)</code></td><td><code>07 Ağustos 2026</code>, dosya adı için</td></tr>
+  <tr><td><code>donem_metni(baş, bit)</code></td><td><code>01.01.2026 - 07.08.2026</code>, sekme başlığı için</td></tr>
+  <tr><td><code>donem_alt_alta(baş, bit)</code></td><td>Hücre içinde iki satır, <code>Yıllar Bazlı</code> için</td></tr>
+  <tr><td><code>dosya_adi_guncelle(ad, baş, bit)</code></td><td>Dosya adındaki dönemi ay adıyla değiştirir</td></tr>
+  <tr><td><code>dosya_adindan_donem(ad)</code></td><td>Dosya adındaki dönemi okur</td></tr>
+</table>
+
+<p><code>gun_coz</code> geçersiz tarihi <code>TarihHatasi</code> ile reddeder.
+Boş değer, bozuk biçim ve takvimde olmayan gün (<code>31.02.2026</code> gibi)
+bu kapsama girer.</p>
+
+<div class="not">
+  <strong>Dosya adı deseni bulunamazsa</strong> <code>dosya_adi_guncelle</code>
+  adı değiştirmeden döndürür ve ikinci değeri <code>False</code> olur. Program
+  bu durumda dosyayı yeniden adlandırmaz.
+</div>
+
+<h3>4.3 labels.py</h3>
+
+<p>SAP çıktılarında Türkçe karakterler kayboluyor. Çıktıda <code>BTK
+ENGELLI</code> yazıyor, raporda ise <code>BTK ENGELLİ</code> geçiyor.
+Grafikler bu hücreleri etiket olarak kullandığı için rapordaki yazım
+korunmalı.</p>
+
+<div class="islev">
+  <span class="imza">anahtar(metin) → str</span>
+  <p>Karşılaştırma anahtarı üretir. Aksanları kaldırır, küçük harfe çevirir,
+  boşlukları teke indirir. <code>I</code>, <code>İ</code>, <code>ı</code> ve
+  <code>i</code> arasındaki ayrımı ortadan kaldırır.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">duzelt(metin, ek_tercihler=None) → str</span>
+  <p>SAP etiketini rapordaki yazıma çevirir. <code>ek_tercihler</code> çalışma
+  kitabından okunan mevcut etiketlerdir. Şube ve ülke adları gibi değişken
+  listelerde bu parametre kullanılır.</p>
+  <p>Listede olmayan yeni bir etiket SAP'taki hâliyle döner. Veri kaybolmaz.</p>
+</div>
+
+<div class="sayfa-kir"></div>
+<h3>4.4 excel_writer.py</h3>
+
+<p>Excel'e yazarken openpyxl değil COM kullanılıyor. Sebebi şu: openpyxl
+çalışma kitabını kaydettiğinde grafikler bozuluyor. Excel'in kendisi
+üzerinden yazınca grafikler, koşullu biçimler ve formüller olduğu gibi
+kalıyor.</p>
+
+<h4>class ExcelOturum</h4>
+
+<p>Bağlam yöneticisi olarak çalışır. Excel'i açar, hata çıksa bile kapatır.</p>
+
+<p>Burada <code>DispatchEx</code> kullanılıyor, <code>Dispatch</code> değil.
+Aradaki fark önemli. <code>Dispatch</code> zaten çalışan bir Excel'e bağlanır
+ve bu iki soruna yol açar. Birincisi, kullanıcının açık Excel'i varsa
+<code>Quit()</code> onun penceresini kapatır, kaydedilmemiş çalışması gider.
+İkincisi, o Excel'de açık bir uyarı penceresi varsa program sonsuza kadar
+bekler. <code>DispatchEx</code> her zaman ayrı ve gizli bir Excel başlatır.</p>
+
+<p>Açılışta şu ayarlar kapatılır: <code>DisplayAlerts</code>,
+<code>ScreenUpdating</code>, <code>EnableEvents</code>,
+<code>AskToUpdateLinks</code>, <code>AlertBeforeOverwriting</code> ve
+<code>DisplayStatusBar</code>. Amaç kimsenin cevaplayamayacağı bir pencerenin
+açılmasını önlemek.</p>
+
+<div class="islev">
+  <span class="imza">yaz_basit(wb, anahtar_ad, kayitlar, log=None) → int</span>
+  <p>Tek sütunlu sekmeleri doldurur. <code>anahtar_ad</code> parametresi
+  <code>icerik</code>, <code>durum</code> veya <code>sube</code> değerlerinden
+  birini alır. Yerleşim bilgisi <code>YERLESIM</code> sabitinden okunur.</p>
+  <p>TOPLAM satırı <code>=SUM(</code> formülü aranarak bulunur. Satır sayısı
+  değişse bile doğru yer bulunur.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">yaz_ulkeler(wb, kayitlar, sekme_adi, log=None) → int</span>
+  <p>İki sütunlu düzeni doldurur. Sol blok satırların yarısını alır, kalan
+  sağa geçer. Tek sayıda ülke varsa fazlalık sol sütunda kalır.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">yaz_ulke_grafigi(wb, kayitlar, sekme_adi, log=None) → int</span>
+  <p>İlk on beş ülkeyi olduğu gibi yazar. On altıncı satıra <code>Diğer</code>
+  etiketiyle genel toplamdan ilk on beşin çıkarılmasıyla bulunan değeri
+  koyar.</p>
+  <p>Bu sekmenin yerleşimi sabittir. 7 ile 21 arası ülkeler, 22 Diğer, 23
+  TOPLAM. Satır eklenmez, bu yüzden pasta grafikleri bozulmaz. On beşten az
+  ülke gelirse kalan satırlar boşaltılır ve <code>Diğer</code> sıfır olur.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">yaz_yillar_bazli(wb, veri, bas, log=None) → (int|None, dict)</span>
+  <p><code>Yıllar Bazlı</code> sekmesindeki cari yıl satırının SAP'tan gelen
+  sütunlarını günceller.</p>
+  <table style="margin-top:0.7em">
+    <tr><th style="width:4em">Sütun</th><th>İçerik</th><th style="width:11em">Kaynak</th></tr>
+    <tr><td>B</td><td>BTK'ya ihbar edilen toplam</td><td>SAP, ülke toplamı</td></tr>
+    <tr><td>C</td><td>Direk oynatan</td><td>SAP, içerik</td></tr>
+    <tr><td>D</td><td>Reklam, tanıtım, yönlendirme</td><td>SAP, içerik</td></tr>
+    <tr><td>E–I</td><td>Engellenen, EEK, mahkeme, pasif, devam eden</td><td><strong>elle girilir</strong></td></tr>
+  </table>
+  <p>Bu satır <code>B25</code> ve <code>E25</code> kümülatif formüllerini
+  besliyor. Word'deki "2006-2026 döneminde toplam..." cümlesi dolaylı olarak
+  buradan geliyor. Satır güncel değilse Word'e de eski sayı gider.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">donem_yaz(wb, bas, bit, log=None) → int</span>
+  <p>Dönem tarihini cari sekmelerde günceller. Geçmiş yıl sekmelerine
+  (2023, 2024, 2025) ve <code>Suç Duyuruları</code> sekmesine dokunmaz.
+  Oradaki tarihler kendi dönemlerine ait.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">_blok_boyutunu_ayarla(ws, ilk, son, hedef, ornek_satir) → int</span>
+  <p>Veri bloğunu hedeflenen satır sayısına getirir. İşin kilit noktası şu:
+  satırlar bloğun <strong>içine</strong> ekleniyor veya içinden siliniyor.
+  Böylece Excel <code>=SUM()</code> aralıklarını ve grafik kaynak aralıklarını
+  kendisi kaydırıyor. Bloğun dışına eklenirse grafik aralığı genişlemez.</p>
+</div>
+
+<h3>4.5 word_writer.py</h3>
+
+<p>Word bir cümleyi düzeltme geçmişi yüzünden parçalara böler. Belgede
+<code>123.456</code> sayısı tek parça değil, <code>'1'</code>,
+<code>'23'</code>, <code>'.'</code> ve <code>'456'</code> şeklinde dört ayrı
+parça olarak duruyor. Bu yüzden düz bul-değiştir hiçbir şey bulamaz.</p>
+
+<p>Çözüm şöyle işliyor: paragrafın tam metni alınır, düzenli ifadeyle
+değiştirilir, sonuç ilk parçaya yazılır, kalan parçalar boşaltılır. Hedef
+paragrafların bütün parçaları aynı biçimde olduğu için (Times New Roman 11,5)
+biçim kaybı olmuyor. Bu kontrol edilerek doğrulandı.</p>
+
+<div class="islev">
+  <span class="imza">guncelle(docx_yolu, veri, bas, bit, xlsx_yolu=None, log=None) → dict</span>
+  <p>Ana giriş noktası. Döndürdüğü sözlük dört anahtar taşır:
+  <code>degisen</code> (hangi paragraflar nasıl değişti), <code>elle</code>
+  (güncellenmeyenler ve nerede düzeltilecekleri), <code>excel_eksik</code>
+  (Excel'den okunamayanlar ve sebepleri), <code>yedek</code> (yedek dosyanın
+  yolu).</p>
+  <p>Dosya açılamaz veya kaydedilemezse <code>WordHatasi</code> verir.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">excel_degerleri_oku(xlsx_yolu) → (dict, list)</span>
+  <p>Çalışma kitabından Word'e taşınacak sayıları okur. Formüllerin
+  hesaplanmış değerini alır.</p>
+  <table style="margin-top:0.7em">
+    <tr><th>Anahtar</th><th>Sekme</th><th style="width:5em">Hücre</th></tr>
+    <tr><td><code>kumulatif_tespit</code></td><td>Yıllar Bazlı</td><td>B25</td></tr>
+    <tr><td><code>kumulatif_engel</code></td><td>Yıllar Bazlı</td><td>E25</td></tr>
+    <tr><td><code>mobil</code></td><td>Mobil Uygulamalar</td><td>B4</td></tr>
+    <tr><td><code>sosyal_basvuru</code></td><td>Sosyal Medya Hesapları</td><td>B4</td></tr>
+    <tr><td><code>sosyal_engel</code></td><td>Sosyal Medya Hesapları</td><td>C4</td></tr>
+    <tr><td><code>turetilmis_site</code></td><td>Suç Duyuruları</td><td>C26</td></tr>
+    <tr><td><code>kok_site</code></td><td>Suç Duyuruları</td><td>D26</td></tr>
+    <tr><td><code>odeme_kurulusu</code></td><td>Ödeme Kuruluşları</td><td>B6</td></tr>
+    <tr><td><code>hat_850</code></td><td>850'li Hatlar</td><td>B4</td></tr>
+    <tr><td><code>iban</code></td><td>Faaliyet Cetveli</td><td>H9</td></tr>
+  </table>
+  <p>Okunamayan bir değer sessizce geçilmez. İkinci dönüş değerinde sebebiyle
+  birlikte bildirilir. Böylece kullanıcı Word'de eski değerin kaldığını
+  öğrenir.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">_ulke_yuzdeleri(ulkeler, adet=10) → (list, int)</span>
+  <p>İlk on ülkenin yuvarlanmış yüzdesini ve kalan dilimi hesaplar.</p>
+  <p>Burada dikkat edilmesi gereken bir ayrıntı var. Her yüzde ayrı ayrı
+  yuvarlanırsa toplam 100 olmayabiliyor. Örneğin 34+30+5+5+5+3+3+3+3+1+9
+  toplamı 101 ediyor. Belgedeki kullanım ise toplamın 100 olmasını
+  gerektiriyor. Bu yüzden kalan dilim <code>100 − ilk on'un toplamı</code>
+  olarak hesaplanıyor ve yuvarlama farkını kendisi emiyor. Excel'deki
+  <code>Diğer</code> hücresiyle aynı mantık.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">_sayilari_guncelle(metin, d, degisen) → str</span>
+  <p>Önce cümleyi tanır, sonra içindeki sayıyı değiştirir. Sıralama böyle
+  olduğu için aynı sayı başka bir bağlamda geçiyorsa yanlışlıkla
+  değişmiyor.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">_ulke_cumlesi_guncelle(metin, d) → str</span>
+  <p>Ülke adlarına dokunmaz, yalnızca addan sonra gelen yüzde değerini
+  günceller. Cümlenin dili ve sırası korunur.</p>
+</div>
+
+<div class="sayfa-kir"></div>
+<h3>4.6 hatalar.py</h3>
+
+<p>Modülün amacı üç maddeyle özetlenebilir. Hiçbir hata sessizce yutulmaz,
+program çökmez, iş gereksiz yere iptal olmaz. Sorunlar üç sınıfa ayrılıyor.</p>
+
+<table>
+  <tr><th style="width:8em">Sınıf</th><th>Anlamı</th></tr>
+  <tr><td><code>KRITIK</code></td><td>Devam edilemez. İşlem durur, dosyalar değişmez.</td></tr>
+  <tr><td><code>SORULUR</code></td><td>Devam edilebilir. Kullanıcıya sorulur.</td></tr>
+  <tr><td><code>BILGI</code></td><td>Kendiliğinden çözülür, yalnızca raporlanır.</td></tr>
+</table>
+
+<div class="islev">
+  <span class="imza">class Rapor</span>
+  <p>Çalışma boyunca oluşan sorunları toplar. <code>sor()</code> metodu
+  kullanıcıya danışır ve cevabına göre <code>True</code> ya da
+  <code>False</code> döndürür. Bir soru mekanizması tanımlanmamışsa
+  varsayılan uygulanır ve bu durum günlüğe yazılır.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">_kisa_hata(e) → str</span>
+  <p>COM ve Windows hatalarını okunabilir hâle getirir. Excel COM hataları çoğu
+  zaman yardım dosyası adı gibi (<code>xlmain11.chm</code>) hiçbir şey
+  anlatmayan metinler döndürüyor. Bu işlev onları ayıklayıp Excel'in gerçek
+  açıklamasını bırakıyor.</p>
+</div>
+
+<h3>4.7 rapor.py</h3>
+
+<pre><code>calistir(xlsx_yolu,
+         sap_klasoru=None,       # klasör yolu, otomatik tanıma
+         bitis_tarihi=None,      # date veya 'GG.AA.YYYY'
+         log=print,
+         ulke_sekmesi=None,
+         grafik_sekmesi=None,
+         yeniden_adlandir=True,  # yeni dönem adıyla kopyala
+         sap_dosyalari=None,     # {'icerik': yol, 'durum': yol, ...}
+         sorucu=None)            # (başlık, ayrıntı) -> bool</code></pre>
+
+<p><code>sap_dosyalari</code> verilirse klasör taraması yapılmaz, doğrudan bu
+dosyalar kullanılır.</p>
+
+<p>İşlem sırası şöyle:</p>
+
+<ol>
+  <li>Excel dosyası doğrulanır. Yoksa <code>ParseError</code> verilir.</li>
+  <li>SAP dosyaları <strong>tek tek</strong> okunur. Biri bozuksa diğerleri
+      okunmaya devam eder.</li>
+  <li>Toplamlar karşılaştırılır, dönem hesaplanır.</li>
+  <li>İstenirse yeni adla kopyalanır, sonra yedek alınır.</li>
+  <li>Her sekme <strong>bağımsız</strong> yazılır. Biri hata verirse kullanıcıya
+      sorulur.</li>
+  <li><code>Yıllar Bazlı</code> B, C, D sütunları yazılır, ardından dönem
+      tarihleri güncellenir.</li>
+  <li><code>CalculateFull()</code> çalıştırılır, dosya kaydedilir.</li>
+  <li>Word güncellenir. Buradaki bir hata Excel'i geçersiz kılmaz.</li>
+  <li>Özet raporu yazılır.</li>
+</ol>
+
+<div class="not">
+  <strong>Ülke dosyası okunamazsa işlem kritik sayılır.</strong> Bu dosya hem
+  Ülke Dağılımı hem Ülke Grafiği sekmesini besliyor. Onsuz anlamlı bir rapor
+  çıkmaz, bu yüzden program devam etmez.
+</div>
+
+<div class="islev">
+  <span class="imza">dosyalari_dogrula(dosyalar) → list[str]</span>
+  <p>Seçilen dosyaların gerçekten o rapora ait olup olmadığını başlıktan
+  kontrol eder. Dosya adı her seferinde değişebildiği için ada güvenilmiyor.</p>
+  <p>Uyuşmazlık işlemi engellemez, yalnızca uyarı üretir. SAP başlığı değişmiş
+  olabilir ve bu durumda programın takılıp kalmaması gerekiyor.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">klasoru_tara(klasor) → dict</span>
+  <p>Klasördeki <code>.txt</code> dosyalarını sınıflandırır. Önce dosya adına
+  bakar, ad bir ipucu vermezse içindeki başlığa bakar.</p>
+</div>
+
+<div class="islev">
+  <span class="imza">yedek_al(xlsx_yolu) → str</span>
+  <p>Dosyanın yanındaki <code>yedek</code> klasörüne tarih ve saat damgalı bir
+  kopya alır.</p>
+</div>
+
+<h3>4.8 gui.py</h3>
+
+<table>
+  <tr><th style="width:16em">Metot</th><th>İşlevi</th></tr>
+  <tr><td><code>.dosya_sec(anahtar)</code></td><td>Tek bir sekme için SAP dosyası seçtirir</td></tr>
+  <tr><td><code>.klasor_sec()</code></td><td>Klasörden dördünü birden doldurur</td></tr>
+  <tr><td><code>.dosyalari_kontrol_et()</code></td><td>İçeriğe bakıp işaret koyar</td></tr>
+  <tr><td><code>.tarih_oku()</code></td><td>Takvimden veya kutudan tarihi okur</td></tr>
+  <tr><td><code>.tarihi_oner()</code></td><td>SAP dosyasından bitiş tarihini doldurur</td></tr>
+  <tr><td><code>.yaz(satir, etiket)</code></td><td>Günlüğe yazar, etiket verilmezse içeriğe göre renklendirir</td></tr>
+  <tr><td><code>.calistir_bas()</code></td><td>Doğrulama, onay ve iş parçacığını başlatma</td></tr>
+  <tr><td><code>._sorucu(başlık, ayrıntı)</code></td><td>İş parçacığından soru sordurur</td></tr>
+  <tr><td><code>._is(xlsx, seçilen, bitiş, word)</code></td><td>Arka planda <code>rapor.calistir</code> çağırır</td></tr>
+</table>
+
+<p><code>_sorucu</code> mekanizması özel bir kısıt yüzünden böyle kuruldu.
+Tkinter yalnızca ana iş parçacığından çağrılabiliyor, <code>after()</code>
+metodu bile iş parçacığından güvenli değil. Bu yüzden soru bir kuyruğa
+bırakılıyor, <code>kuyrugu_isle</code> ana döngüde soruyor ve cevap
+<code>threading.Event</code> ile bekleniyor.</p>
+
+<div class="sayfa-kir"></div>
+<h2>5. Kullanım</h2>
+
+<h3>5.1 Pencereden</h3>
+
+<p><code>IhbarRapor.exe</code> dosyasına çift tıklayın.</p>
+
+<ol>
+  <li><strong>Excel raporu.</strong> <code>.xlsx</code> dosyasını seçin.</li>
+  <li><strong>SAP çıktıları.</strong> Dört satırın her biri için ilgili
+      <code>.txt</code> dosyasını gösterin. Dosyalar aynı klasördeyse
+      <em>Klasörden otomatik doldur</em> düğmesi dördünü birden doldurur.</li>
+  <li><strong>Rapor bitiş tarihi.</strong> Takvimden günü seçin. Kutu SAP
+      çıktısındaki tarihle dolu gelir.</li>
+  <li><strong>Word raporu.</strong> İsteğe bağlı.</li>
+  <li><strong>Aktar</strong> düğmesine basın.</li>
+</ol>
+
+<p>Her dosya satırının yanında bir işaret çıkar:</p>
+
+<table>
+  <tr><th style="width:5em">İşaret</th><th>Anlamı</th></tr>
+  <tr><td>✓</td><td>Dosyanın başlığı bu sekmeye uyuyor</td></tr>
+  <tr><td><strong>!</strong></td><td>Dosya başka bir rapora benziyor</td></tr>
+  <tr><td><strong>?</strong></td><td>Başlık tanınamadı</td></tr>
+</table>
+
+<h3>5.2 Komut satırından</h3>
+
+<pre><code>IhbarRapor.exe --rapor "rapor.xlsx" --sap "SAP klasoru" --bitis 17.08.2026</code></pre>
+
+<p>Dosya adları değişkense her raporu tek tek verebilirsiniz. Bu durumda
+dördünü birden vermek zorunlu:</p>
+
+<pre><code>IhbarRapor.exe --rapor "rapor.xlsx" ^
+  --icerik "a.txt" --durum "b.txt" --sube "c.txt" --ulke "d.txt" ^
+  --bitis 17.08.2026</code></pre>
+
+<table>
+  <tr><th style="width:17em">Seçenek</th><th>İşlevi</th></tr>
+  <tr><td><code>--rapor</code></td><td>Excel dosyası (zorunlu)</td></tr>
+  <tr><td><code>--sap</code></td><td>SAP klasörü</td></tr>
+  <tr><td><code>--icerik --durum --sube --ulke</code></td><td>Dosyaları tek tek verme</td></tr>
+  <tr><td><code>--bitis GG.AA.YYYY</code></td><td>Rapor bitiş tarihi</td></tr>
+  <tr><td><code>--word</code></td><td>Word raporunu da güncelle</td></tr>
+  <tr><td><code>--ad-degistirme</code></td><td>Dosya adını değiştirme</td></tr>
+  <tr><td><code>--sor</code></td><td>Sorun çıkarsa ekrandan sor</td></tr>
+  <tr><td><code>--devam</code></td><td>Sorun çıkarsa sormadan devam et</td></tr>
+  <tr><td><code>--hata-durdur</code></td><td>Varsayılan. İlk sorunda iptal eder.</td></tr>
+</table>
+
+<h3>5.3 Çıkış kodları</h3>
+
+<table>
+  <tr><th style="width:5em">Kod</th><th>Anlamı</th></tr>
+  <tr><td>0</td><td>Başarılı</td></tr>
+  <tr><td>1</td><td>Kritik hata, dosyalar değişmedi</td></tr>
+  <tr><td>2</td><td>Beklenmeyen hata</td></tr>
+  <tr><td>3</td><td>Kısmen başarılı, bazı bölümler yazılamadı</td></tr>
+  <tr><td>4</td><td>İptal edildi</td></tr>
+</table>
+
+<h2>6. Programın dokunmadığı alanlar</h2>
+
+<p>Aşağıdaki hücreler elle giriliyor. Program bunlara dokunmaz.</p>
+
+<table>
+  <tr><th style="width:19em">Konum</th><th>İçerik</th></tr>
+  <tr><td><code>Yıllar Bazlı</code> E23–I23</td><td>Erişime engellenen, EEK, mahkeme kararı, pasif/domain, devam eden</td></tr>
+  <tr><td><code>Suç Duyuruları</code> yeni dönem satırı</td><td>Dava dosyası bazlı</td></tr>
+  <tr><td><code>Mobil Uygulamalar</code> B4, C4</td><td>Dava sonucu</td></tr>
+  <tr><td><code>Sosyal Medya Hesapları</code> B4, C4</td><td>Dava sonucu</td></tr>
+  <tr><td><code>850'li Hatlar</code> B4, C4</td><td>Dava sonucu</td></tr>
+  <tr><td><code>Ödeme Kuruluşları</code> B4, B5</td><td>Dava sonucu</td></tr>
+  <tr><td><code>Faaliyet Cetveli</code></td><td>Program bu sekmeye hiç girmez</td></tr>
+  <tr><td>Geçmiş yıl sekmeleri</td><td>2023, 2024, 2025 tarihsel verisi</td></tr>
+</table>
+
+<p>Bu sekmelerin TOPLAM satırları formüllü. Üstteki hücreyi girdiğinizde toplam
+kendiliğinden düzeliyor ve Word'e yansıyor.</p>
+
+<h2>7. Yıl değiştiğinde</h2>
+
+<p><code>excel_writer.py</code> içindeki iki sabit güncellenir:</p>
+
+<pre><code>ULKE_SEKME = "2026 Ülke Dağılımı"
+GRAFIK_SEKME = "2026 Ülke Grafiği"</code></pre>
+
+<p>Diğer sekmelerin adı yıldan bağımsız, değişiklik gerekmiyor.</p>
+
+<h2>8. Derleme</h2>
+
+<pre><code>pip install pyinstaller pywin32 tkcalendar python-docx openpyxl
+pyinstaller --clean --noconfirm ihbar_rapor.spec</code></pre>
+
+<p>Sonuç <code>dist\IhbarRapor.exe</code> olur. Tek dosya, 33 MB, yanında
+başka bir şey gerekmiyor.</p>
+
+<div class="not">
+  <strong>babel yerel verileri</strong> <code>ihbar_rapor.spec</code> içinde
+  elle toplanıyor. Bu adım atlanırsa exe açılırken <code>unknown locale:
+  tr_TR</code> hatası veriyor.
+</div>
+
+<h2>9. Bilinen kısıtlar</h2>
+
+<ul>
+  <li>Bilgisayarda Microsoft Excel kurulu olmalı. COM olmadan grafikler
+      korunamıyor.</li>
+  <li>Word'ün eski <code>.doc</code> biçimi desteklenmiyor,
+      <code>.docx</code> gerekiyor.</li>
+  <li><code>Yıllar Bazlı</code> E–I sütunları SAP'ta bulunmuyor. Bu yüzden
+      <code>E25</code> hücresindeki erişime engellenen kümülatifi, siz o
+      sütunları güncelleyene kadar eski kalıyor.</li>
+  <li>Word'ün 113. paragrafındaki kök site sayısı ile <code>Suç
+      Duyuruları</code> D26 formülü arasında bir fark tespit edildi
+      Program Excel'i esas alıyor. Hangisinin doğru olduğu
+      kontrol edilmeli.</li>
+  <li>Makine yoğunken, örneğin tam ekran bir uygulama çalışırken, art arda
+      yapılan Excel COM çağrıları yavaşlayabiliyor.</li>
+</ul>

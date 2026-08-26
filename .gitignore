@@ -1,0 +1,70 @@
+# ---------------------------------------------------------------------------
+# KURUM VERISI - ASLA DEPOYA GIRMEZ
+# ---------------------------------------------------------------------------
+# Bu program gercek rapor dosyalari uzerinde calisir. Asagidaki desenler
+# yanlislikla veri yuklenmesini onler. Kural: veri disarida, kod iceride.
+
+*.xlsx
+*.xlsm
+*.xls
+*.docx
+*.doc
+*.txt
+*.TXT
+*.pdf
+
+# Yedekler (program her calistirmada buraya kopya alir)
+yedek/
+yedek*/
+**/yedek/
+
+# SAP ciktilari
+SAP text outputs/
+*sap*output*/
+
+# ---------------------------------------------------------------------------
+# ISTISNALAR - bunlar KOD/BELGE, veri degil
+# ---------------------------------------------------------------------------
+!README.md
+!DOKUMANTASYON.md
+!OKUBENI.md
+!.gitignore
+!requirements.txt
+
+# ---------------------------------------------------------------------------
+# DERLEME CIKTILARI
+# ---------------------------------------------------------------------------
+build/
+dist/
+*.exe
+*.manifest
+
+# ---------------------------------------------------------------------------
+# PYTHON
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+venv/
+.venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# ---------------------------------------------------------------------------
+# ISLETIM SISTEMI / EDITOR
+# ---------------------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# Kullanici ayar dosyasi (yerel yollar icerir)
+.ihbar_rapor.json
